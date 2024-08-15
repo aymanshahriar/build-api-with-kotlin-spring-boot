@@ -1,0 +1,20 @@
+version: '3.9'
+
+services:
+  kotlinapp:
+    container_name: kotlinapp  # Rename this to iad_server
+    image: kotlinapp:latest
+    build:
+      context: .
+      dockerfile: dockerfile
+      args:   # These are not the same as environment variables
+        DB_URL: ${DB_URL}
+        POSTGRES_USER: ${POSTGRES_USER}
+        POSTGRES_USER_PASSWORD: ${POSTGRES_USER_PASSWORD}
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: jdbc:postgresql://172.21.0.25:5432/pt_8
+      POSTGRES_USER: postgres
+      POSTGRES_USER_PASSWORD: password
+    
